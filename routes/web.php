@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//routes
+Route::get('/', [IndexController::class, 'index'])->name('/')->middleware('guest');
+
+//session uuid routes
+Route::get('game/{id}', [IndexController::class, 'getGameByUUID'])->name('getGame');
+Route::post('game', [IndexController::class, 'getGameByUUID'])->name('getGame-post');
